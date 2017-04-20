@@ -6,7 +6,8 @@
     <p><input type="text" name="user_name" required="true"></p>
     <p>Password</p>
     <p><input type="password" name="user_password" required="true"></p>
-    <p><input class="btn btn-primary" name="login_submit" type="submit" value="login"></p>
+    <p><input class="btn btn-primary" name="login_submit" type="submit" value="login">
+    <input class="btn btn-default" name="register_submit" type="submit" value="register" style="color:#337ab7"></p>
   </form>
   <?php
     //Aber zuerst: Prüfe ob User bereits eingelogt bzw Session existent
