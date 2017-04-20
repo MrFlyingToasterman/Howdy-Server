@@ -12,7 +12,7 @@
   <?php
     //Aber zuerst: Prüfe ob User bereits eingelogt bzw Session existent
     if (isset($_SESSION["howdy"])) {
-        header(chat_window.php);
+        header('Location: chat_window.php');
     }
 
     if (isset($_POST["user_name"])) {
@@ -42,7 +42,8 @@
                           $_SESSION["howdy"] = $howdy;
                       }
 
-                      header(chat_window.php);
+                      //Ruft chatfenster auf
+                      header('Location: chat_window.php');
 
                     }
                 }
