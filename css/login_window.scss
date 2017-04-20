@@ -1,0 +1,45 @@
+html,body {
+  height:100%;
+  width:100%;
+  margin:0;
+  //background: #000;
+  background-image: url("http://wallpaper-gallery.net/images/white-red-wallpaper/white-red-wallpaper-25.jpg");
+  background-repeat: no-repeat;
+}
+
+body {
+  display:flex;
+}
+
+.logo {
+  width: 230px;
+  height: 90px;
+}
+
+.login_form {
+  width: 300px;
+    height: 300px;
+
+    border-radius: 10px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.login_window_container {
+  position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    /* Center form on page horizontally & vertically */
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+}
+
+.login_window_container .well{
+  border: 1px solid #888;
+  box-shadow: 2px 2px 10px grey;
+}
