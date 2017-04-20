@@ -9,6 +9,11 @@
     <p><input class="btn btn-primary" name="login_submit" type="submit" value="login"></p>
   </form>
   <?php
+    //Aber zuerst: Prüfe ob User bereits eingelogt bzw Session existent
+    if (isset($_SESSION["howdy"])) {
+        header(chat_window.php);
+    }
+
     if (isset($_POST["user_name"])) {
 
       //SQL Lesen vorbereiten
@@ -28,7 +33,16 @@
                     if ($userpasswordwho  == $ds["Passwort"]) {
                       //Login Erfolgreich!
                       $drop_error = false;
-                      // sesson erstellen mit nutzernamen; chat_window aufrufen;
+                      // session erstellen mit nutzernamen; chat_window aufrufen;
+                      session_start();
+
+                      if (!isset($_SESSION["howdy"])) {
+                          $howdy = $userwho;
+                          $_SESSION["howdy"] = $howdy;
+                      }
+
+                      header(chat_window.php);
+
                     }
                 }
               }
