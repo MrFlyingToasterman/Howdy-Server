@@ -6,8 +6,8 @@
     <p><input type="text" name="user_name" required="true"></p>
     <p>Password</p>
     <p><input type="password" name="user_password" required="true"></p>
-    <p><input class="btn btn-primary" name="login_submit" type="submit" value="login">
-    <input class="btn btn-default" name="register_submit" type="submit" value="register" style="color:#337ab7"></p>
+    <p><input class="btn btn-primary" name="login_submit" type="submit" value="Login">
+    <a class="btn btn-default" name="register_submit" value="register" style="color:#337ab7" href="register_window.php">Register</a></p>
   </form>
   <?php
     //Aber zuerst: Prüfe ob User bereits eingelogt bzw Session existent
