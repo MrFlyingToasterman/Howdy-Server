@@ -11,6 +11,6 @@ will. Specifically you can redistribute and/or modify it under the terms of the
 published by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-To start the server just type 
+<b>To start the server just type</b> 
 `npm start`
-in the working directory.
+<b>in the working directory.</b>
