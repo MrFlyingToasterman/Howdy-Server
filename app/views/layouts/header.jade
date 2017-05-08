@@ -1,9 +1,13 @@
+include mixins
+
 doctype html
 html
   head
     title!= title
     link(href='/css/bootstrap.min.css', rel='stylesheet')
     link(href='/css/style.css', rel='stylesheet')
+    +bootswatch("superhero")
+    script(src='/js/typed.js')
 
   body
 
@@ -64,6 +68,7 @@ html
                 
               li
                 a(href="/signup") Sign Up
+      
               
         if (flashMessage && flashMessage.length)
           div.row

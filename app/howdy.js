@@ -1,8 +1,11 @@
+require('when-dom-ready');
+
 const express       = require('express');
 const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash         = require('connect-flash');
 const app           = express();
+const node_port          = 1701;
 
 // Include Authentication Strategies
 require('./config/passport/passport');
@@ -22,7 +25,7 @@ app.use(flash());
 require('./config/routes/routes')(app);
 
 // Change port if you'd like here
-const server = app.listen(3000, function () {
+const server = app.listen(node_port, function () {
   const port = server.address().port;
   console.log('Listening at http://localhost:%s', port);
 });

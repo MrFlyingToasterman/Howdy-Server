@@ -1,5 +1,11 @@
+@font-face {
+	font-family: OpenSans;
+	src: url('/fonts/OpenSans-Light.ttf');
+}
+
 * {
   margin: 0;
+  font-family: OpenSans;
 }
 html, body {
   height: 100%;
@@ -17,20 +23,53 @@ footer, .page-wrap:after {
   height: 142px;
 }
 footer {
-  background-color: #222;
+  background-color: #df691a;
   border: 1px solid #080808;
   color: #FFF;
   padding: 25px;
 }
 .navbar {
   border-radius: 0px;
+  height: 50px;
+}
+nav a {
+  font-size: 18px !important;
+}
+nav li {
+  padding-right:5px;
+  padding-top: 5px;
 }
 .signin-form {
   width: 300px;
-  padding: 25px;
 }
 input[type="text"],
 input[type="email"],
 input[type="password"] {
   margin-bottom: 25px;
+}
+
+.typewriter {
+  font-size: 35px;
+  color: lightgreen;
+}
+.typed-cursor{
+	opacity: 1;
+	-webkit-animation: blink 0.7s infinite;
+	-moz-animation: blink 0.7s infinite;
+	animation: blink 0.7s infinite;
+}
+@keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
 }

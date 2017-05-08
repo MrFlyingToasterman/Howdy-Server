@@ -1,9 +1,21 @@
 include ./layouts/header.jade
 
+script.
+  document.addEventListener('DOMContentLoaded', function(){
+      Typed.new('.typewriter', {
+        strings: ["Welcome to Howdy!", "A modern and secure messenger."],
+        contentType: 'text',
+        typeSpeed: 10,
+        backSpeed: 10,
+        backDelay: 2000,
+        showCursor: true
+      });
+  });
+
+
 div.container
   .jumbotron
-    h1 Welcome to Howdy!
-    p This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
-
+    p.console
+      span.typewriter
               
 include ./layouts/footer.jade

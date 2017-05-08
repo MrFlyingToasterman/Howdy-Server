@@ -4,6 +4,4 @@ module.exports = function(app) {
 
   // All signup / signin routes
   require('./signup-routes')(app);
-
-  // Add future routes here
 }
