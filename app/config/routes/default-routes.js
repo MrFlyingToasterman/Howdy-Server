@@ -4,8 +4,8 @@ module.exports = function(app) {
   **/
   app.get('/', function(req, res) {
     res.render('index', {
-      title: 'Your page title',
-      message: 'Your header message',
+      title: 'Howdy',
+      message: 'Howdy is a simple, modern and secure web based messenger',
       userName: (req.user) ? req.user.username : undefined,
       flashMessage: req.flash('flashMessage')
     });

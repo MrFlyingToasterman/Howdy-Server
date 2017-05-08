@@ -15,8 +15,8 @@ module.exports = function(app) {
   **/
   app.get('/signup', function(req, res) {
     res.render('signup', {
-      title: 'Your title',
-      message: 'Your Message',
+      title: 'Sign Up',
+      message: 'Sign Up',
       userName: (req.user) ? req.user.username : undefined,
       flashMessage: req.flash('flashMessage')
     });
