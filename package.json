@@ -33,7 +33,11 @@
     "mysql": "^2.9.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "when-dom-ready": "^1.2.11"
+    "when-dom-ready": "^1.2.11",
+	"fs": "latest",
+	"https": "latest",
+	"http": "latest",
+	"crypto": "latest"
   },
   "devDependencies": {
     "mocha": "^2.3.4",
