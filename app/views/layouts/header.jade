@@ -8,12 +8,14 @@ html
     link(href='/css/style.css', rel='stylesheet')
     +bootswatch("superhero")
     script(src='/js/typed.js')
+    script(src='/js/saveChanges.js')
 
   body
-
     nav.navbar.navbar-inverse
       div.container-fluid
         div.navbar-header
+          a.navbar-brand(href="/")
+            img(class='img-responsive logo',src='/images/logo_text_transparent.png')
           button.navbar-toggle.collapsed(
             type="button",
             data-toggle="collapse",
@@ -28,12 +30,14 @@ html
         div#main-navbar-collapse.collapse.navbar-collapse
           ul.nav.navbar-nav
             li
-              a(href="/") Howdy
+              
 
           ul.nav.navbar-nav.navbar-right
             if userName
               li
-                a(href="/")= userName
+                a(href="/chat") Enter Chat
+              li
+                a(href="/profile")= userName
               li
                 a(href="/logout") Log out
             else

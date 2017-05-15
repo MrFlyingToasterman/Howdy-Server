@@ -5,15 +5,18 @@ const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash         = require('connect-flash');
 const fs            = require('fs');
-const https         = require('https');
-const http          = require('http');
-const node_port     = 1701;
+const jade          = require('jade');
+const multipart     = require('multipart');
+const node_port     = 8000;
+const chat_port     = 42000;
 
 // Include Authentication Strategies
 require('./config/passport/passport');
 
 var app = express();
-
+const http = require('http').Server(app);
+const https = require('https');
+const io = require('socket.io')(http);
 
 // Enable reverse proxy support in Express. This causes the
 // the "X-Forwarded-Proto" header field to be trusted so its
@@ -41,6 +44,14 @@ app.use(function(req,res,next) {
     }
 });
 
+app.locals.saveChanges = function(req, res) {
+  var username = req.body.username;
+  var email = req.body.email;
+  var password = req.body.password;
+  alert(username);
+  alert(email);
+}
+
 // Include all Routes
 require('./config/routes/routes')(app);
 
@@ -57,6 +68,21 @@ var sslOptions = {
 };
 
 var net=require('net');
-var handle=net.createServer().listen(8000);
+var handle=net.createServer().listen(node_port);
 
 https.createServer(sslOptions, app).listen(handle);
+
+// Socket.io stuff
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('chat message', function(msg){
+    io.emit('chat message: ', msg);
+  });
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+http.listen(chat_port, function(){
+  console.log('http chat server listening on *:' + chat_port);
+});

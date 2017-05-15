@@ -1,0 +1,47 @@
+include layouts/header.jade
+
+style.
+  input {
+    display: inline-block;
+    border: 1px solid transparent;
+  }
+
+div.container
+  div.jumbotron
+    div.container
+      div.profile
+        form(action="/saveProfile", method="get", enctype="multipart/form-data")
+          table
+            tr
+              td 
+                h2 Profile
+            tr
+              td
+                p Username
+                    
+              td
+                div.form-group
+                  input(type="text",placeholder="Username",class="form-control",name="username",value=userName)
+                  tr
+                    td
+                      p E-Mail
+                    td
+                      div.form-group
+                        input(type="text",placeholder="E-Mail",class="form-control",name="email",value=email)
+                        tr
+                          td
+                            p Password  
+                          td
+                            div.form-group
+                              input(type="text",placeholder="Password",class="form-control",name="password",value=password)
+            tr
+              td
+                input(type="submit",value="Save Changes")
+include layouts/footer.jade
+
+script.
+  function saveChanges() {
+    alert(req.body.form.username.value);
+    alert(email);
+    alert(password);
+  }
