@@ -1,0 +1,14 @@
+{
+	"log": true,
+	"port": 8000,
+	"url": "/",
+	"ssl": {
+		"use": true,
+		"key": "/ssl/key.pem",
+		"cert": "/path/to/your/ssl.crt"
+	},
+        "readline": {
+        	"use": true,
+		"prompt": "[--:--:--][CONSOLE] "
+        }
+}

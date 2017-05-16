@@ -1,34 +1,247 @@
 doctype html
-html
+html(lang='en')
   head
-    title Socket.IO chat
-    style.
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #messages { margin-bottom: 40px }
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='OpenSource node.js chat application')
+    meta(name='author', content='Igor Antun')
+    link(rel='icon', type='image/png', href='img/favicon.png')
+    title Node.JS Chat
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/chat.css', rel='stylesheet')
+    link(href='css/ripples.css', rel='stylesheet')
+    link(href='css/material-wfont.min.css', rel='stylesheet')
+    link(href='css/jquery-ui.css', rel='stylesheet')
+    link(href='//cdn.jsdelivr.net/emojione/1.3.0/assets/css/emojione.min.css', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
   body
-    ul#messages
-    form(action='')
-      input#m(autocomplete='off')
-      button Send
-    script(src='https://cdn.socket.io/socket.io-1.2.0.js')
-    script(src='https://code.jquery.com/jquery-1.11.1.js')
+    .container-fluid.main
+      .row
+        .col-xs-12.col-lg-10.col-lg-offset-1
+          br
+          .well.page.active
+            nav.navbar.shadow-z-2
+              .container-fluid
+                .navbar-header
+                  button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#collapser')
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                  a.navbar-brand(href='#')
+                    | Howdy! 
+                    span#version(style='font-size:7pt')
+                #collapser.collapse.navbar-collapse
+                  ul.nav.navbar-nav
+                    li.active
+                      a(href='#') Chat
+                    li
+                      a#help(href='#') Help
+                    li
+                      a#user(href='#') Users
+                    li
+                      a#menu-admin(href='#', style='display:none') Admin
+                    li
+                      a#menu-options(href='#') Options
+            .row
+              .col-xs-12.col-md-12
+                .well
+                  .row
+                    .col-xs-6
+                      h2 Messenger
+                    .col-xs-6
+                      button#options.btn.btn-fab.btn-fab-mini.btn-primary.pull-right
+                        i#icon-settings.mdi.mdi-action-settings
+                      button#audio.btn.btn-fab.btn-fab-mini.btn-primary.pull-right(style='display:none')
+                        i#icon-audio.mdi.mdi-av-mic
+                  br
+                  .panel.panel-default
+                    .panel-heading Messages
+                    #panel.panel-body
+                  p#typing
+                    br
+                  hr
+                  .row
+                    .col-lg-8.col-lg-offset-2
+                      .input-group
+                        span.input-group-addon
+                          span#icon.mdi.mdi-social-person
+                        input#message.form-control(type='text', placeholder=userName, aria-describedby='basic-addon1', maxlength='768')
+                        span.input-group-btn
+                          button#send.btn.btn-primary.btn-flat Connect
+            .row
+              .col-xs-12
+                p#badges.text-right.pull-right
+                  span
+                    label#users.label 0 USERS
+                  span
+                    label#admin.label.label-warning(style='display:none') ADMIN
+    #help-dialog.modal.fade(tabindex='-1')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-body
+            .row
+              h4
+                b Current available commands:
+              .col-xs-3
+                b
+                  b COMMAND
+                  br
+                  | /pm
+                  br
+                  | /me or /em
+                  br
+                  | /shrug
+                  br
+                  | /name
+                  br
+                  | /users
+                  br
+                  | /help
+                  br
+                  | /clear
+                  br
+                  | /reconnect
+              .col-xs-2
+                b VARIABLES
+                br
+                | [user] [message]
+                br
+                | [message]
+                br
+                | [message]
+                br
+                | [name]
+                br
+                br
+                br
+              .col-xs-7
+                b DESCRIPTION
+                br
+                | Sends a private 
+                i [message]
+                |  for 
+                i [user]
+                br
+                | Sends 
+                i [message]
+                |  in italics
+                br
+                | Sends 
+                i [message]
+                |  followed by '¯\_(ツ)_/¯'
+                br
+                | Changes your name to 
+                i [name]
+                br
+                | Shows users on the server
+                br
+                | Shows this help dialog
+                br
+                | Clears your chat history
+                br
+                | Reconnects to the server
+    #admin-help-dialog.modal.fade(tabindex='-1')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-body
+            .row
+              h4
+                b Current available administrator commands:
+              .col-xs-3
+                b
+                  b COMMAND
+                  br
+                  | /alert
+                  br
+                  | /kick
+                  br
+                  | /ban
+                  br
+                  | /role
+              .col-xs-2
+                b VARIABLES
+                br
+                | [message]
+                br
+                | [user]
+                br
+                | [user] [minutes]
+                br
+                | [user] [1-3]
+              .col-xs-7
+                b DESCRIPTION
+                br
+                | Sends global 
+                i [message]
+                br
+                | Kicks 
+                i [user]
+                |  from the server
+                br
+                | Bans 
+                i [user]
+                |  from the server for 
+                i [minutes]
+                br
+                | Changes 
+                i [user]
+                |  administrator permissions
+    #options-dialog.modal.fade(tabindex='-1')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-body
+            h4
+              b Chat options:
+            .togglebutton
+              label
+                | Emojis
+                input#emoji(type='checkbox')
+            .togglebutton
+              label
+                | Greentext
+                input#greentext(type='checkbox')
+            #toggle-inline.togglebutton
+              label
+                | Inline Images
+                input#inline(type='checkbox')
+            .togglebutton
+              label
+                | Mention Sound
+                input#sound(type='checkbox')
+            #toggle-desktop.togglebutton(style='display:none')
+              label
+                | Desktop Notifications
+                input#desktop(type='checkbox')
+            #toggle-synthesis.togglebutton(style='display:none')
+              label
+                | Speech Synthesis [Experimental]
+                input#synthesis(type='checkbox')
+            #toggle-recognition.togglebutton(style='display:none')
+              label
+                | Speech Recognition [Experimental]
+                input#recognition(type='checkbox')
+    #users-dialog.modal.fade(tabindex='-1')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-body
+            h4
+              b Current users:
+            #users-content
     script.
-      $(function () {
-      var socket = io();
-      $('form').submit(function(){
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      return false;
-      });
-      socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-      window.scrollTo(0, document.body.scrollHeight);
-      });
+      var VERSION="0.5 beta";
+    script(src='//lorenzoongithub.github.io/completely/complete.ly.1.0.1.min.js')
+    script(src='//code.jquery.com/jquery-2.1.3.min.js')
+    script(src='//cdn.jsdelivr.net/emojione/1.3.0/lib/js/emojione.min.js')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+    script(src='js/jquery-ui.min.js')
+    script(src='js/jquery.easing.min.js')
+    script(src='js/jquery.linkify.min.js')
+    script(src='js/ripples.min.js')
+    script(src='js/material.min.js')
+    script(src='js/chat.js')
+    script.
+      $(document).ready(function() {
+        $.material.init();
       });

@@ -28,6 +28,11 @@
 	"connect-flash": "latest",
 	"http": "latest",
 	"https": "latest",
-	"io": "latest"
+	"io": "latest",
+    "underscore": "latest",
+	"underscore.string": "latest",
+	"serve-favicon": "latest",
+	"sockjs": "latest",
+	"chalk": "latest"
   }
 }
