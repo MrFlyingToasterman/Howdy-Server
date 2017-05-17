@@ -9,7 +9,6 @@ const jade          = require('jade');
 const multipart     = require('multipart');
 const bodyparser   = require('body-parser');
 const node_port     = 8000;
-const chat_port     = 42000;
 
 /* Requires */
 var favicon = require('serve-favicon');
@@ -85,24 +84,10 @@ app.use(flash());
 //     }
 // });
 
-app.locals.saveChanges = function(req, res) {
-  var username = req.body.username;
-  var email = req.body.email;
-  var password = req.body.password;
-}
+
 
 // Include all Routes
 require('./config/routes/routes')(app);
-
-//https.createServer(sslOptions, app).listen(handle);
-// https.createServer({
-//     key: fs.readFileSync('./app/ssl/key.pem'),
-//     cert: fs.readFileSync('./app/ssl/cert.pem'),
-//     passphrase: 'datadata'
-// }, app).listen(node_port);
-
-
-
 
 
 /* Logic */
