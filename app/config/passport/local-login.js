@@ -6,12 +6,12 @@ const bcrypt        = require('bcryptjs');
 module.exports = function(salt) {
 
   passport.use('local-login', new LocalStrategy({
-    usernameField : 'email',
+    usernameField : 'username',
     passwordField : 'password',
     passReqToCallback : true
-  }, function(req, email, password, done) {
-    connection.query("SELECT * FROM users WHERE email = ?",
-      [email],
+  }, function(req, username, password, done) {
+    connection.query("SELECT * FROM users WHERE username = ?",
+      [username],
       function(err, rows) {
         if (err)
           return done(err);
@@ -25,6 +25,7 @@ module.exports = function(salt) {
         }
 
         return done(null, rows[0]);
+        global.userName = username;
       })
   }));
 }

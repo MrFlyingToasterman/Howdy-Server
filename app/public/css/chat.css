@@ -1,130 +1,144 @@
-#panel {
-    height: 300px;
-    overflow: auto;
-    max-height: 300px;
+/* Fix user-agent */
+
+* {
+  box-sizing: border-box;
 }
 
-#emoji, #sound, #desktop, #greentext, #synthesis, #recognition, #inline {
-    margin-left: 10px;
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
 }
 
-#icon-settings, #icon-audio {
-    color: white;
-    top: -7px;
-    left: -3.5px;
+html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
 }
 
-#audio {
-    margin-right: 10px;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-#typing {
-    margin-left: 10px;
-    font-style: italic;
-    font-size: 9pt;
+ul {
+  list-style: none;
+  word-wrap: break-word;
 }
 
-.mdi {
-    font-size: 20px;
+/* Pages */
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
-.name {
-    float: left;
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
-.namelink {
-    color: inherit!important;
+/* Login Page */
+
+.login.page {
+  background-color: #000;
 }
 
-.self {
-    color: #eb9d00!important;
+.login.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
 }
 
-.helper {
-    color: #55aef6!important;
+.login.page .form .usernameInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  width: 400px;
 }
 
-.moderator {
-    color: #689f38!important;
+.login.page .title {
+  font-size: 200%;
 }
 
-.administrator {
-    color: #f55549!important;
+.login.page .usernameInput {
+  font-size: 200%;
+  letter-spacing: 3px;
 }
 
-.msg {
-    word-wrap: break-word;
-    word-break: break-all;
-    padding-right: 20px;
-    padding-left: 20px;
+.login.page .title, .login.page .usernameInput {
+  color: #fff;
+  font-weight: 100;
 }
 
-.msg a img {
-    max-width: 350px;
+/* Chat page */
+
+/*.chat.page {
+  display: none;
+}*/
+
+/* Font */
+
+.messages {
+  font-size: 150%;
 }
 
-.timestamp {
-    float: right;
-    font-size: 8pt;
-    font-weight: bold;
-    margin-left: 20px;
+#inputMessage {
+  font-size: 100%;
+  border: 10px solid #000;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
 }
 
-.delete {
-    float: right;
-    font-size: 8pt;
-    font-weight: bold;
-    display: none;
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
 }
 
-.pm , .mention {
-    color: #eb9d00;
+/* Messages */
+
+.chatArea {
+  height: 100%;
+  padding-bottom: 60px;
 }
 
-.emote span:nth-child(4) {
-    font-style: italic;
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
 }
 
-.global, .kick, .role, .ban {
-    color: #f55549!important;
+.message.typing .messageBody {
+  color: gray;
 }
 
-.info {
-    color: #55aef6;
-}
-
-.light {
-    color: #616161;
-}
-
-.message {
-    color: #2b2b2b;
-    margin-top: 3px;
-}
-
-.spin {
-    -webkit-animation: spin 1500ms infinite linear;
-    animation: spin 1500ms infinite linear;
-}
-
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-
-@keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+.username {
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
 }

@@ -10,4 +10,5 @@ module.exports = function(app) {
       flashMessage: req.flash('flashMessage')
     });
   });
+
 }
