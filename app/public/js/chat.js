@@ -45,7 +45,7 @@ $(function() {
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
-      $.get("http://localhost:3000/getUser", function(usah){
+      $.get("https://howdymessenger.herokuapp.com/getUser", function(usah){
 
         username = usah;
 

@@ -57,10 +57,10 @@ io.on('connection', function (socket) {
     });
 
     var connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'Lacsap',
-      database: 'HowdyDB'
+      host: 'sql11.freesqldatabase.com',
+      user: 'sql11180500',
+      password: 'REsBrPG33U',
+      database: 'sql11180500'
     });
 
     var post  = {
