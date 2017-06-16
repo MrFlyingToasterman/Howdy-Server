@@ -11,6 +11,8 @@ will. Specifically you can redistribute and/or modify it under the terms of the
 published by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
+<b> Requirements: <li> NodeJS </li> </b>
+
 <b>To start the server just type</b> 
 `npm start`
 <b>in the working directory.</b>
