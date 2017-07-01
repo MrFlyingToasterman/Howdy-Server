@@ -7,7 +7,6 @@ const fs            = require('fs');
 const jade          = require('jade');
 const bodyparser    = require('body-parser');
 const path          = require('path');
-const node_port     = 8000;
 const config        = require('./config.json');
 const log           = require('log');
 // Include Authentication Strategies
@@ -15,21 +14,16 @@ require('./config/passport/passport');
 const connection    = require('./config/connection.js');
 const mysql = require('mysql');
 
-var app = require('express')();
+var app = express();
+const port = 3000;
+
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
-
-const axios = require('axios');
-
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
-});
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
-app.use(express.static('./app/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(require('express-session')({ secret: 'n0d3castz secret cat key', resave: false, saveUninitialized: false }));
@@ -39,6 +33,63 @@ app.use(flash());
 
 // Include all Routes
 require('./config/routes/routes')(app);
+
+server.listen(port, function () {
+  console.log('Server listening at port %d', port);
+});
+
+var write2DB = function(username, message) {
+
+  connection.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+
+            var post = {username: username, message: message};
+
+            connection.query('INSERT INTO messages SET ?', post, function (error, results, fields) {
+                 // And done with the connection.
+                 connection.release();
+
+                 // Handle error after the release.
+                 if (error) throw error;
+               });
+
+            connection.on('error', function (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            });
+        });
+}
+
+var readFromDB = function() {
+
+    var results;
+
+    connection.getConnection(function (err, connection) {
+
+        if(err) {
+          connection.release();
+          callback(null, err);
+          throw err;
+        }
+
+        connection.query('SELECT * FROM messages', function (error, results, fields) {
+
+            console.log(results);
+            this.results = results;
+
+            if (error) throw error;
+        })
+
+    });
+
+    return results;
+
+}
 
 
 // Chatroom
@@ -56,25 +107,7 @@ io.on('connection', function (socket) {
       message: data
     });
 
-    var connection = mysql.createConnection({
-      host: 'sql11.freesqldatabase.com',
-      user: 'sql11180500',
-      password: 'REsBrPG33U',
-      database: 'sql11180500'
-    });
-
-    var post  = {
-      username: socket.username,
-      message: data
-    };
-
-    console.log(post);
-
-    if(post.username) {
-      connection.query('INSERT INTO messages SET ?', post, function (error, results, fields) {
-        if (error) throw error;
-      });
-    }
+    write2DB(socket.username,data);
 
   });
 
@@ -94,6 +127,22 @@ io.on('connection', function (socket) {
       username: socket.username,
       numUsers: numUsers
     });
+
+
+    //readFromDB();
+
+
+    socket.broadcast.emit('new message', {
+       username: 'Server',
+       message: 'Willkommen Nutzer ' + socket.username
+    });
+
+    socket.to(socket.username).emit('new message', {
+      username: 'testnutzer',
+      message: 'testnachricht'
+    })
+
+
   });
 
   // when the client emits 'typing', we broadcast it to others

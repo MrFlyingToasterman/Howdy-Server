@@ -88,9 +88,9 @@ ul {
 
 /* Chat page */
 
-/*.chat.page {
+.chat.page {
   display: none;
-}*/
+}
 
 /* Font */
 
@@ -98,17 +98,8 @@ ul {
   font-size: 150%;
 }
 
-#inputMessage {
+.inputMessage {
   font-size: 100%;
-  border: 10px solid #000;
-  bottom: 0;
-  height: 60px;
-  left: 0;
-  outline: none;
-  padding-left: 10px;
-  position: absolute;
-  right: 0;
-  width: 100%;
 }
 
 .log {
@@ -141,4 +132,18 @@ ul {
   overflow: hidden;
   padding-right: 15px;
   text-align: right;
+}
+
+/* Input */
+
+.inputMessage {
+  border: 10px solid #000;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
 }

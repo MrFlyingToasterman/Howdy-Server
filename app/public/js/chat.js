@@ -25,7 +25,6 @@ $(function() {
 
   var socket = io();
 
-
   function addParticipantsMessage (data) {
     var message = '';
     if (data.numUsers === 1) {
@@ -36,24 +35,20 @@ $(function() {
     log(message);
   }
 
-
   // Sets the client's username
   function setUsername () {
+    username = cleanInput($usernameInput.val().trim());
 
+    // If the username is valid
+    if (username) {
       $loginPage.fadeOut();
       $chatPage.show();
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
-      $.get("https://howdymessenger.herokuapp.com/getUser", function(usah){
-
-        username = usah;
-
-      });
-
-      socket.emit('add user', username);
       // Tell the server your username
-
+      socket.emit('add user', username);
+    }
   }
 
   // Sends a chat message
@@ -62,14 +57,15 @@ $(function() {
     // Prevent markup from being injected into the message
     message = cleanInput(message);
     // if there is a non-empty message and a socket connection
+    if (message && connected) {
+      $inputMessage.val('');
       addChatMessage({
         username: username,
         message: message
       });
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', message);
-      var msgbox = document.getElementById("inputMessage");
-      msgbox.reset();
+    }
   }
 
   // Log a message
